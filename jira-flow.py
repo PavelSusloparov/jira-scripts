@@ -57,7 +57,7 @@ projects = [JIRA_PROJECT]
 buffer_size = 200
 start_at = 0
 while buffer_size > 0:
-    jql = 'project IN ("{}") AND type in (standardIssueTypes()) AND status in ({}) AND created >= "2020-01-01 23:59" ORDER BY key ASC'.format(
+    jql = 'project IN ("{}") AND type in (standardIssueTypes()) AND status in ({}) AND created >= "2020-01-01 00:01" AND created <= "2020-03-01 00:01" ORDER BY key ASC'.format(
         '","'.join(projects), ','.join(done))
     print(jql)
     issues = jira.search_issues(jql, maxResults=buffer_size, startAt=start_at, expand='changelog')
