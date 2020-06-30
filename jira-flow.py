@@ -11,8 +11,6 @@ JIRA_PASSWORD = os.getenv('JIRA_PASSWORD')
 JIRA_PROJECT = os.getenv('JIRA_PROJECT')
 
 print("Connect to JIRA")
-print("Server: {server}. User name: {user_name}, password: {password}, project: {project}".format(
-    server=JIRA_SERVER, user_name=JIRA_USER_NAME, password=JIRA_PASSWORD, project=JIRA_PROJECT))
 jira = JIRA(server=JIRA_SERVER, basic_auth=(JIRA_USER_NAME, JIRA_PASSWORD))
 
 work = ['In Planning', 'In Progress', 'In Review', 'In release', 'In Testing']
@@ -57,7 +55,7 @@ projects = [JIRA_PROJECT]
 buffer_size = 200
 start_at = 0
 while buffer_size > 0:
-    jql = 'project IN ("{}") AND type in (standardIssueTypes()) AND status in ({}) AND created >= "2020-01-01 00:01" AND created <= "2020-03-01 00:01" ORDER BY key ASC'.format(
+    jql = 'project IN ("{}") AND type in (standardIssueTypes()) AND status in ({}) AND created >= "2020-01-01 00:01" AND created <= "2020-04-01 00:01" ORDER BY key ASC'.format(
         '","'.join(projects), ','.join(done))
     print(jql)
     issues = jira.search_issues(jql, maxResults=buffer_size, startAt=start_at, expand='changelog')
